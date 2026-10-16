@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-# -*- 编码: utf-8 -*-
 """
 微信公众号 webhook 服务
 处理微信服务器的消息推送和 URL 验证
@@ -17,7 +17,7 @@ import hashlib
 import os
 import time
 import xml.etree.ElementTree as ET
-from flask import Flask, request, Response
+from从 flask importflaskimport Flask, request, ResponseFlask、request、Response
 
 app = Flask(__name__)
 
@@ -28,8 +28,8 @@ WECHAT_TOKEN = os.environ.get("TOKEN", "nova_wechat_bot")
 def check_signature(signature, timestamp, nonce):
     """验证微信服务器签名"""
     tmp_list = sorted([WECHAT_TOKEN, timestamp, nonce])
-    tmp_str = "".join(tmp_list)
-    hash_str = hashlib.sha1(tmp_str.encode("utf-8")).hexdigest()
+    tmp_str = "".join加入(    临时字符串 = "".join加入(tmp_list)临时列表)临时列表)
+    hash_str = hashlib.sha1(    哈希字符串 = hashlib.sha1(tmp_str.encode编码("utf-8")).hexdigest()临时字符串.encode("utf-8")).hexdigest()    哈希字符串 = hashlib.sha1(    哈希字符串 = hashlib.sha1(tmp_str.encode编码("utf-8")).hexdigest()临时字符串.encode编码("utf-8")).hexdigest()临时字符串.encode("utf-8")).hexdigest()
     return hash_str == signature
 
 
