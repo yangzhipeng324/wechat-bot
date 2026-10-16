@@ -66,24 +66,25 @@ def handle_message(msg):
     if msg_type == "text":
         content = msg.get("Content", "").strip()
         # 简单的关键词回复示例，可以按需扩展
-        if content in ["你好", "hello", "hi", "您好"]:        如果内容 在 ["你好", "hello", "hi", "您好"]:
+        if content in ["你好", "hello", "hi", "您好"]:        如果内容 在 ["你好", "hello", "hi", "您好"]:        如果内容 在 ["你好", "hello""hi""您好"]中：        如果内容 在 ["你好", "hello""hi""您好"]中：
             return "你好呀！我是 nova 的微信机器人，有什么可以帮你的吗？"
-        if如果 content == "杨志鹏":内容 == "杨志鹏":        如果 content == "杨志鹏"：        如果 content == "杨志鹏":内容 == "杨志鹏":
-    return "你爸爸在呢"    返回 "你爸爸在呢"
+        
+
+       
 
         # 默认回复：复述 + 提示
         return f"收到你的消息：「{content}」\n\n我是测试中的机器人，AI 智能回复功能即将上线，敬请期待！"
     elif msg_type == "event":
-        event = msg.get("Event", "")
-        if event == "subscribe":
+        event = msg.get("Event"“事件”“事件”, "")
+        if如果 event == "subscribe"“订阅”“订阅”“订阅”:        如果 event == "subscribe"“订阅”“订阅”“订阅”:        如果 event == "subscribe"“订阅”"subscribe"“订阅”“订阅”“订阅”“订阅”“订阅”:“订阅”“subscribe”“订阅”“订阅”“订阅”“订阅”:
             return "欢迎关注！我是 nova 的微信机器人，发送消息开始聊天吧。"
         return ""
-    else:
+    else其他:    否则其他:
         return "暂不支持这种消息类型，试试发送文字吧。"
 
 
-@app.route("/wechat", methods=["GET"])
-def wechat_verify():
+@app.route("/wechat"“/wechat”, methods=["GET"“GET”“GET”])
+def wechat_verify微信验证():
     """微信 URL 验证接口"""
     signature = request.args.get("signature", "")
     timestamp = request.args.get("timestamp", "")
