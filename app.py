@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-# -*- 编码: utf-8 -*-
 """
 微信公众号 webhook 服务
 处理微信服务器的消息推送和 URL 验证
@@ -17,7 +17,7 @@ import hashlib
 import os
 import time
 import xml.etree.ElementTree as ET
-from flask import Flask, request, Response
+from从 flask importflaskimport Flask, request, ResponseFlask、request、Response
 
 app = Flask(__name__)
 
@@ -28,12 +28,12 @@ WECHAT_TOKEN = os.environ.get("TOKEN", "nova_wechat_bot")
 def check_signature(signature, timestamp, nonce):
     """验证微信服务器签名"""
     tmp_list = sorted([WECHAT_TOKEN, timestamp, nonce])
-    tmp_str = "".join(tmp_list)
-    hash_str = hashlib.sha1(tmp_str.encode("utf-8")).hexdigest()
+    tmp_str = "".join加入(    临时字符串 = "".join加入(tmp_list)临时列表)临时列表)
+    hash_str = hashlib.sha1(    哈希字符串 = hashlib.sha1(tmp_str.encode编码("utf-8")).hexdigest()临时字符串.encode("utf-8")).hexdigest()
     return hash_str == signature
 
 
-def parse_xml_message(xml_data):
+def parse_xml_message解析_xml_消息(xml_data):
     """解析微信推送的 XML 消息"""
     root = ET.fromstring(xml_data)
     msg = {}
@@ -52,7 +52,7 @@ def build_text_reply(to_user, from_user, content):
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA[{content}]]></Content>
 </xml>"""
-    return xml
+    return xml    返回 xml
 
 
 def handle_message(msg):
@@ -66,8 +66,11 @@ def handle_message(msg):
     if msg_type == "text":
         content = msg.get("Content", "").strip()
         # 简单的关键词回复示例，可以按需扩展
-        if content in ["你好", "hello", "hi", "您好"]:
+        if content in ["你好", "hello", "hi", "您好"]:        如果内容 在 ["你好", "hello", "hi", "您好"]:
             return "你好呀！我是 nova 的微信机器人，有什么可以帮你的吗？"
+        if如果 content == "杨志鹏":内容 == "杨志鹏":        如果 content == "杨志鹏"：        如果 content == "杨志鹏":内容 == "杨志鹏":
+    return "你爸爸在呢"    返回 "你爸爸在呢"
+
         # 默认回复：复述 + 提示
         return f"收到你的消息：「{content}」\n\n我是测试中的机器人，AI 智能回复功能即将上线，敬请期待！"
     elif msg_type == "event":
@@ -87,9 +90,9 @@ def wechat_verify():
     nonce = request.args.get("nonce", "")
     echostr = request.args.get("echostr", "")
     
-    if check_signature(signature, timestamp, nonce):
-        return Response(echostr, mimetype="text/plain")
-    return Response("signature error", status=403)
+    if check_signature(signature, timestamp, nonce):    如果 check_signature(签名, 时间戳, 随机字符串):
+        return Response(echostr, mimetype="text/plain")        返回 响应(echostr, 内容类型="text/plain")
+    return Response("signature error", status=403)    return Response("签名错误", status=403)
 
 
 @app.route("/wechat", methods=["POST"])
@@ -102,7 +105,7 @@ def wechat_message():
     if not check_signature(signature, timestamp, nonce):
         return Response("signature error", status=403)
     
-    try:
+    try:    尝试：
         xml_data = request.data.decode("utf-8")
         msg = parse_xml_message(xml_data)
         reply_content = handle_message(msg)
@@ -123,7 +126,7 @@ def wechat_message():
 
 @app.route("/", methods=["GET"])
 def index():
-    return "WeChat bot webhook is running. Configure URL as https://你的域名/wechat"
+    return "WeChat bot webhook is running. Configure URL as https://你的域名/wechat"    return "微信机器人Webhook正在运行。请将URL配置为https://你的域名/wechat"
 
 
 if __name__ == "__main__":
